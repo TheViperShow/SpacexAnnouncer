@@ -78,7 +78,7 @@
         <dependency>
             <groupId>com.github.TheViperShow</groupId>
             <artifactId>ViperTomlConfig</artifactId>
-            <version>0.0.5-SNAPSHOT</version>
+            <version>0.0.6-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
