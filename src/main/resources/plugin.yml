@@ -1,0 +1,6 @@
+name: SpacexAnnouncer
+version: ${project.version}
+main: studio.thevipershow.spacexannouncer.SpacexAnnouncer
+api-version: 1.16
+authors: [ TheViperShow ]
+description: Announce SpaceX launches!

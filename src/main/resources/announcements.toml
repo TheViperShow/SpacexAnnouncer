@@ -1,0 +1,15 @@
+[announcements]
+auto-announce = true
+
+[countdown]
+enabled = true
+seconds-before = 10
+announce-interval = 1
+announce-type = 'CHAT' # (CHAT, TITLE, ACTION_BAR)
+message-format = '{ROCKET} Is going to launch in {TIME} seconds!'
+
+[countdown.sounds]
+enabled = true
+sound-name = 'BLOCK_NOTE_BLOCK_XYLOPHONE' # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
+pitch = 0.850
+volume = 8.0
