@@ -12,6 +12,7 @@ public final class SpacexAnnouncer extends JavaPlugin {
     public final void onEnable() { // Plugin startup logic
         pluginsConfigurationsManager.loadPluginData(this, Configurations.class);
         pluginsConfigurationsManager.getPluginData(this).getLoadedTomlConfigs().values().forEach(tomlConfig -> {
+            tomlConfig.exportResource(false);
             tomlConfig.storeContent();
             tomlConfig.loadAllValues();
         });
