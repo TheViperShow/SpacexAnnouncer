@@ -4,12 +4,12 @@ import studio.thevipershow.spacexannouncer.http.model.RequestType;
 
 public final class NextLaunchResponse extends AbstractJsonResponse {
 
-    private String rocketUID;
-    private long fireDateUnixTime;
-    private String details;
-    private int flightNumber;
-    private String missionName;
-    private String youtubeWebcast;
+    private String rocketUID = UNAVAILABLE;
+    private long fireDateUnixTime = -1;
+    private String details = UNAVAILABLE;
+    private int flightNumber = -1;
+    private String missionName = UNAVAILABLE;
+    private String youtubeWebcast = UNAVAILABLE;
 
     public NextLaunchResponse(String json) {
         super(json, RequestType.LAUNCH);
@@ -17,12 +17,19 @@ public final class NextLaunchResponse extends AbstractJsonResponse {
 
     @Override
     public final void tryAssignValues() {
-        setRocketUID(jsonObject.get("rocket").getAsString());
-        setFireDateUnixTime(jsonObject.get("date_unix").getAsLong());
-        setDetails(jsonObject.get("details").getAsString());
-        setFlightNumber(jsonObject.get("flight_number").getAsInt());
-        setMissionName(jsonObject.get("name").getAsString());
-        setYoutubeWebcast(jsonObject.get("links").getAsJsonObject().get("webcast").getAsString());
+        try {
+            setRocketUID(jsonObject.get("rocket").getAsString());
+            setFireDateUnixTime(jsonObject.get("date_unix").getAsLong());
+            setDetails(jsonObject.get("details").getAsString());
+            setFlightNumber(jsonObject.get("flight_number").getAsInt());
+            setMissionName(jsonObject.get("name").getAsString());
+            var webcast = jsonObject.get("links").getAsJsonObject().get("webcast");
+            if (!webcast.isJsonNull()) {
+                setYoutubeWebcast(webcast.getAsString());
+            }
+        } catch (Exception ignored) {
+
+        }
     }
 
     /**

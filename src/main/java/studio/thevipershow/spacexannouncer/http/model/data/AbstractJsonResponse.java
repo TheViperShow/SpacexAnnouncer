@@ -7,6 +7,7 @@ import studio.thevipershow.spacexannouncer.http.model.RequestType;
 
 public abstract class AbstractJsonResponse implements JsonData {
 
+    protected static final String UNAVAILABLE = "Unavailable";
     protected final String json;
     protected final RequestType requestType;
     protected final JsonObject jsonObject;

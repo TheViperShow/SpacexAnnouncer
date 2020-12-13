@@ -29,23 +29,36 @@ public final class SpaceXRequestsCache<S extends Enum<S> & ResponseClassHolder &
      */
     @SuppressWarnings("unchecked")
     public final <T extends AbstractJsonResponse> CompletableFuture<T> getResponse(@NotNull S responseEnumType) {
-        if (!this.cacheMap.containsKey(responseEnumType)) {
-            return (CompletableFuture<T>) responseEnumType.makeRequest().whenComplete((v, e) -> {
-                if (v != null) {
-                    this.cacheMap.put(responseEnumType, spaceXHttp.getJsonResponseCacheFactory().buildCache(v));
-                }
-            });
-        } else {
-            var data = this.cacheMap.get(responseEnumType);
-            if ((System.currentTimeMillis() - data.getCreationTime()) / 1000 <= CACHE_TIME_SECONDS) {
-                return (CompletableFuture<T>) CompletableFuture.completedFuture(this.cacheMap.get(responseEnumType).getJsonResponse());
-            } else { // yeah duplicated code.
+        try {
+            if (!this.cacheMap.containsKey(responseEnumType)) {
+
                 return (CompletableFuture<T>) responseEnumType.makeRequest().whenComplete((v, e) -> {
-                    if (v != null) {
+                    if (v != null && e == null) {
                         this.cacheMap.put(responseEnumType, spaceXHttp.getJsonResponseCacheFactory().buildCache(v));
+                    } else {
+                        e.printStackTrace();
                     }
                 });
+
+            } else {
+                var data = this.cacheMap.get(responseEnumType);
+                if ((System.currentTimeMillis() - data.getCreationTime()) / 1000 <= CACHE_TIME_SECONDS) {
+
+                    return (CompletableFuture<T>) CompletableFuture.completedFuture(this.cacheMap.get(responseEnumType).getJsonResponse());
+                } else { // yeah duplicated code.
+
+                    return (CompletableFuture<T>) responseEnumType.makeRequest().whenComplete((v, e) -> {
+                        if (v != null && e == null) {
+                            this.cacheMap.put(responseEnumType, spaceXHttp.getJsonResponseCacheFactory().buildCache(v));
+                        } else {
+                            e.printStackTrace();
+                        }
+                    });
+                }
             }
+        } catch (final Exception e) {
+            e.printStackTrace();
+            return CompletableFuture.failedFuture(e);
         }
     }
 

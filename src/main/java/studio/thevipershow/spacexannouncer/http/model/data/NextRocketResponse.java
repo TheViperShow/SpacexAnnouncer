@@ -4,17 +4,17 @@ import studio.thevipershow.spacexannouncer.http.model.RequestType;
 
 public final class NextRocketResponse extends AbstractJsonResponse {
 
-    private double rocketHeight;
-    private double rocketDiameter;
-    private int rocketMassKilograms;
-    private String rocketName;
-    private String rocketType;
-    private int stages;
-    private int boosters;
-    private int launchCost;
-    private String country;
-    private String company;
-    private String description;
+    private double rocketHeight = -1;
+    private double rocketDiameter = -1;
+    private int rocketMassKilograms = -1;
+    private String rocketName = UNAVAILABLE;
+    private String rocketType = UNAVAILABLE;
+    private int stages = -1;
+    private int boosters = -1;
+    private int launchCost = -1;
+    private String country = UNAVAILABLE;
+    private String company = UNAVAILABLE;
+    private String description = UNAVAILABLE;
 
     public NextRocketResponse(String json) {
         super(json, RequestType.ROCKET);
@@ -22,17 +22,21 @@ public final class NextRocketResponse extends AbstractJsonResponse {
 
     @Override
     public final void tryAssignValues() {
-        setRocketHeight(jsonObject.get("height").getAsJsonObject().get("meters").getAsDouble());
-        setRocketDiameter(jsonObject.get("diameter").getAsJsonObject().get("meters").getAsDouble());
-        setRocketMassKilograms(jsonObject.get("mass").getAsJsonObject().get("kg").getAsInt());
-        setRocketName(jsonObject.get("name").getAsString());
-        setRocketType(jsonObject.get("type").getAsString());
-        setStages(jsonObject.get("stages").getAsInt());
-        setBoosters(jsonObject.get("boosters").getAsInt());
-        setLaunchCost(jsonObject.get("cost_per_launch").getAsInt());
-        setCountry(jsonObject.get("country").getAsString());
-        setCompany(jsonObject.get("company").getAsString());
-        setDescription(jsonObject.get("description").getAsString());
+        try {
+            setRocketHeight(jsonObject.get("height").getAsJsonObject().get("meters").getAsDouble());
+            setRocketDiameter(jsonObject.get("diameter").getAsJsonObject().get("meters").getAsDouble());
+            setRocketMassKilograms(jsonObject.get("mass").getAsJsonObject().get("kg").getAsInt());
+            setRocketName(jsonObject.get("name").getAsString());
+            setRocketType(jsonObject.get("type").getAsString());
+            setStages(jsonObject.get("stages").getAsInt());
+            setBoosters(jsonObject.get("boosters").getAsInt());
+            setLaunchCost(jsonObject.get("cost_per_launch").getAsInt());
+            setCountry(jsonObject.get("country").getAsString());
+            setCompany(jsonObject.get("company").getAsString());
+            setDescription(jsonObject.get("description").getAsString());
+        } catch (Exception ignored) {
+
+        }
     }
 
     /**
