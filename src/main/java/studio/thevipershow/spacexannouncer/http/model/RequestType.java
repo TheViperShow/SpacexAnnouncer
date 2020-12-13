@@ -11,10 +11,10 @@ import studio.thevipershow.spacexannouncer.http.model.data.AbstractJsonResponse;
 import studio.thevipershow.spacexannouncer.http.model.data.NextLaunchResponse;
 import studio.thevipershow.spacexannouncer.http.model.data.NextRocketResponse;
 import studio.thevipershow.spacexannouncer.http.model.data.ResponseClassHolder;
-import studio.thevipershow.spacexannouncer.http.model.data.ResponseProvider;
+import studio.thevipershow.spacexannouncer.http.model.data.JsonResponseProvider;
 
 @SuppressWarnings("unchecked")
-public enum RequestType implements ResponseClassHolder, ResponseProvider {
+public enum RequestType implements ResponseClassHolder, JsonResponseProvider {
 
     LAUNCH(NextLaunchResponse.class) {
         @Override

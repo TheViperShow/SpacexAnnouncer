@@ -10,13 +10,25 @@ public final class JsonResponseCacheFactory {
     private JsonResponseCacheFactory() {
     }
 
-    public static JsonResponseCacheFactory getInstance() {
+    /**
+     * Get the instance of this class
+     *
+     * @return This object instance.
+     */
+    public static synchronized JsonResponseCacheFactory getInstance() {
         if (instance == null) {
             instance = new JsonResponseCacheFactory();
         }
         return instance;
     }
 
+    /**
+     * Build cache for a json response.
+     *
+     * @param data The response data.
+     * @param <T>  The type of the response.
+     * @return a json response cache with the same type of the data.
+     */
     @NotNull
     public final <T extends AbstractJsonResponse> JsonResponseCache<T> buildCache(@NotNull T data) {
         final long currentTime = System.currentTimeMillis();

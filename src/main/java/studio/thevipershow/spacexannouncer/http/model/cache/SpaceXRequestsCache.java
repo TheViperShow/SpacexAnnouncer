@@ -7,9 +7,9 @@ import org.jetbrains.annotations.NotNull;
 import studio.thevipershow.spacexannouncer.http.SpaceXHttp;
 import studio.thevipershow.spacexannouncer.http.model.data.AbstractJsonResponse;
 import studio.thevipershow.spacexannouncer.http.model.data.ResponseClassHolder;
-import studio.thevipershow.spacexannouncer.http.model.data.ResponseProvider;
+import studio.thevipershow.spacexannouncer.http.model.data.JsonResponseProvider;
 
-public final class SpaceXRequestsCache<S extends Enum<S> & ResponseClassHolder & ResponseProvider> {
+public final class SpaceXRequestsCache<S extends Enum<S> & ResponseClassHolder & JsonResponseProvider> {
 
     private final Map<S, JsonResponseCache<?>> cacheMap;
     private final SpaceXHttp<S> spaceXHttp;
@@ -20,6 +20,13 @@ public final class SpaceXRequestsCache<S extends Enum<S> & ResponseClassHolder &
         this.cacheMap = new ConcurrentHashMap<>();
     }
 
+    /**
+     * Get a response based on an enum object.
+     *
+     * @param responseEnumType The response type.
+     * @param <T>              The returned response type.
+     * @return The completable future with the typed response.
+     */
     @SuppressWarnings("unchecked")
     public final <T extends AbstractJsonResponse> CompletableFuture<T> getResponse(@NotNull S responseEnumType) {
         if (!this.cacheMap.containsKey(responseEnumType)) {
@@ -42,11 +49,21 @@ public final class SpaceXRequestsCache<S extends Enum<S> & ResponseClassHolder &
         }
     }
 
+    /**
+     * Get the map that holds cached data.
+     *
+     * @return The cached data.
+     */
     @NotNull
     public final Map<S, JsonResponseCache<?>> getCacheMap() {
         return cacheMap;
     }
 
+    /**
+     * Get spacexHttp class.
+     *
+     * @return The spacexHttp object.
+     */
     @NotNull
     public final SpaceXHttp<S> getSpaceXHttp() {
         return spaceXHttp;

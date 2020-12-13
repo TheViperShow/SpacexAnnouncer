@@ -6,9 +6,9 @@ import studio.thevipershow.spacexannouncer.http.model.cache.JsonResponseCacheFac
 import studio.thevipershow.spacexannouncer.http.model.cache.SpaceXRequestsCache;
 import studio.thevipershow.spacexannouncer.http.model.data.AbstractJsonResponse;
 import studio.thevipershow.spacexannouncer.http.model.data.ResponseClassHolder;
-import studio.thevipershow.spacexannouncer.http.model.data.ResponseProvider;
+import studio.thevipershow.spacexannouncer.http.model.data.JsonResponseProvider;
 
-public final class SpaceXHttp<S extends Enum<S> & ResponseClassHolder & ResponseProvider> {
+public final class SpaceXHttp<S extends Enum<S> & ResponseClassHolder & JsonResponseProvider> {
 
     private final JsonResponseCacheFactory jsonResponseCacheFactory = JsonResponseCacheFactory.getInstance();
     private final SpaceXRequestsCache<S> spaceXRequestsCache;
@@ -21,11 +21,21 @@ public final class SpaceXHttp<S extends Enum<S> & ResponseClassHolder & Response
         return spaceXRequestsCache.getResponse(s);
     }
 
+    /**
+     * Get the factory for json cache data responses.
+     *
+     * @return Json responses factory.
+     */
     @NotNull
     public final JsonResponseCacheFactory getJsonResponseCacheFactory() {
         return jsonResponseCacheFactory;
     }
 
+    /**
+     * Get cache for spacex requests.
+     *
+     * @return The cache container for all spacex requests.
+     */
     @NotNull
     public final SpaceXRequestsCache<S> getSpaceXRequestsCache() {
         return spaceXRequestsCache;

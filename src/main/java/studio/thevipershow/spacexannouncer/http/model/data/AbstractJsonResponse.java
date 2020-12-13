@@ -20,10 +20,18 @@ public abstract class AbstractJsonResponse implements JsonData {
         }
     }
 
+    /**
+     * Get the json text.
+     * @return Text as json.
+     */
     public String getJson() {
         return json;
     }
 
+    /**
+     * Get the json as object.
+     * @return The json text as object.
+     */
     public JsonObject getJsonObject() {
         return jsonObject;
     }
