@@ -1,12 +1,10 @@
-package studio.thevipershow.spacexannouncer.http.model;
+package studio.thevipershow.spacexannouncer.http.model.data;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import studio.thevipershow.spacexannouncer.http.model.RequestType;
+import studio.thevipershow.spacexannouncer.http.model.data.AbstractJsonResponse;
 
-public final class NextRocketResponse {
-
-    private final String json;
-    private final JsonObject jsonObject;
+public final class NextRocketResponse extends AbstractJsonResponse {
 
     private double rocketHeight;
     private double rocketDiameter;
@@ -21,13 +19,10 @@ public final class NextRocketResponse {
     private String description;
 
     public NextRocketResponse(String json) {
-        this.json = json;
-        this.jsonObject = new JsonParser().parse(json).getAsJsonObject();
-        if (!this.jsonObject.isJsonObject()) {
-            throw new RuntimeException("This was not a json object.");
-        }
+        super(json, RequestType.ROCKET);
     }
 
+    @Override
     public final void tryAssignValues() {
         setRocketHeight(jsonObject.get("height").getAsJsonObject().get("meters").getAsDouble());
         setRocketDiameter(jsonObject.get("diameter").getAsJsonObject().get("meters").getAsDouble());

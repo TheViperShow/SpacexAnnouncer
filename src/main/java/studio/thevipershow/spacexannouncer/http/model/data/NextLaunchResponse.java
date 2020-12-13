@@ -1,12 +1,10 @@
-package studio.thevipershow.spacexannouncer.http.model;
+package studio.thevipershow.spacexannouncer.http.model.data;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import studio.thevipershow.spacexannouncer.http.model.RequestType;
+import studio.thevipershow.spacexannouncer.http.model.data.AbstractJsonResponse;
 
-public final class NextLaunchResponse {
-
-    private final String json;
-    private final JsonObject jsonObject;
+public final class NextLaunchResponse extends AbstractJsonResponse {
 
     private String rocketUID;
     private long fireDateUnixTime;
@@ -16,13 +14,10 @@ public final class NextLaunchResponse {
     private String youtubeWebcast;
 
     public NextLaunchResponse(String json) {
-        this.json = json;
-        this.jsonObject = new JsonParser().parse(json).getAsJsonObject();
-        if (!this.jsonObject.isJsonObject()) {
-            throw new RuntimeException("The data was not a json object.");
-        }
+        super(json, RequestType.LAUNCH);
     }
 
+    @Override
     public final void tryAssignValues() {
         setRocketUID(jsonObject.get("rocket").getAsString());
         setFireDateUnixTime(jsonObject.get("date_unix").getAsLong());

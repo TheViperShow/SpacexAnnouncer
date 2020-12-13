@@ -16,14 +16,15 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import studio.thevipershow.spacexannouncer.SpacexAnnouncer;
 import studio.thevipershow.spacexannouncer.http.SpaceXHttp;
-import studio.thevipershow.spacexannouncer.http.model.NextLaunchResponse;
-import studio.thevipershow.spacexannouncer.http.model.NextRocketResponse;
+import studio.thevipershow.spacexannouncer.http.model.RequestType;
+import studio.thevipershow.spacexannouncer.http.model.data.NextLaunchResponse;
+import studio.thevipershow.spacexannouncer.http.model.data.NextRocketResponse;
 
 @CommandAlias("spacex|space-x")
 public final class SpacexCommand extends BaseCommand {
 
     private final SpacexAnnouncer spacexAnnouncer;
-    private SpaceXHttp spaceXHttp = new SpaceXHttp();
+    private final SpaceXHttp<RequestType> spacexHttp = new SpaceXHttp<>();
     private final static String PREFIX = "&8[&6SpaceX&8]&7: ";
 
     private static String color(final String str) {
@@ -75,13 +76,13 @@ public final class SpacexCommand extends BaseCommand {
     @CommandPermission("spacex.next")
     @Description("Shows you the next programmed SpaceX launch.")
     public final void nextLaunch(CommandSender sender) {
-        spaceXHttp.getNextLaunch().thenAccept(nextLaunch -> displayNextLaunch(sender, nextLaunch));
+        spacexHttp.<NextLaunchResponse>makeRequest(RequestType.LAUNCH).thenAccept(nextLaunch -> displayNextLaunch(sender, nextLaunch));
     }
 
     @Subcommand("next rocket")
     @CommandPermission("spacex.next")
     @Description("Shows you the next rocket that is going to be launched.")
     public final void nextRocket(CommandSender sender) {
-        spaceXHttp.getNextRocket().thenAccept(nextRocket -> displayNextRocket(sender, nextRocket));
+        spacexHttp.<NextRocketResponse>makeRequest(RequestType.ROCKET).thenAccept(nextRocket -> displayNextRocket(sender, nextRocket));
     }
 }
