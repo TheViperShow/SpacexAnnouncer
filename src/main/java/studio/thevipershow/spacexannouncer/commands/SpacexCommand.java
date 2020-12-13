@@ -69,7 +69,7 @@ public final class SpacexCommand extends BaseCommand {
         sender.sendMessage(color("  &7Rocket Launch Cost &f-> &6" + nextRocket.getLaunchCost() + "&7$"));
         sender.sendMessage(color("  &7Rocket Country &f-> &6" + nextRocket.getCountry()));
         sender.sendMessage(color("  &7Rocket Company &f-> &6" + nextRocket.getCompany()));
-        sender.sendMessage(color("  &7Rocket Description &f-> &6" + nextRocket.getDescription()));
+        sender.sendMessage(color("  &7Rocket Description &f-> &6&o" + nextRocket.getDescription()));
     }
 
     @Subcommand("next launch")
