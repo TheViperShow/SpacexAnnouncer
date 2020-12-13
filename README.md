@@ -1,0 +1,4 @@
+## SpacexAnnouncer
+[![GitHub issues](https://img.shields.io/github/issues/TheViperShow/SpacexAnnouncer)](https://github.com/TheViperShow/SpacexAnnouncer/issues) [![GitHub forks](https://img.shields.io/github/forks/TheViperShow/SpacexAnnouncer)](https://github.com/TheViperShow/SpacexAnnouncer/network) [![GitHub stars](https://img.shields.io/github/stars/TheViperShow/SpacexAnnouncer)](https://github.com/TheViperShow/SpacexAnnouncer/stargazers) [![GitHub license](https://img.shields.io/github/license/TheViperShow/SpacexAnnouncer)](https://github.com/TheViperShow/SpacexAnnouncer) ![Lines of code](https://img.shields.io/tokei/lines/github/TheViperShow/SpacexAnnouncer) ![GitHub repo size](https://img.shields.io/github/repo-size/TheViperShow/SpacexAnnouncer)
+<br>
+Get information about next launches and Space-X rockets!

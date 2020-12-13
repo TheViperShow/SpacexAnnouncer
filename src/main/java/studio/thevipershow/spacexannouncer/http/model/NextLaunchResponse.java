@@ -25,66 +25,66 @@ public final class NextLaunchResponse {
 
     public final void tryAssignValues() {
         setRocketUID(jsonObject.get("rocket").getAsString());
-        setFireDateUnixTime(jsonObject.get("static_fire_date_unix").getAsLong());
+        setFireDateUnixTime(jsonObject.get("date_unix").getAsLong());
         setDetails(jsonObject.get("details").getAsString());
         setFlightNumber(jsonObject.get("flight_number").getAsInt());
         setMissionName(jsonObject.get("name").getAsString());
         setYoutubeWebcast(jsonObject.get("links").getAsJsonObject().get("webcast").getAsString());
     }
 
-    public String getJson() {
+    public final String getJson() {
         return json;
     }
 
-    public JsonObject getJsonObject() {
+    public final JsonObject getJsonObject() {
         return jsonObject;
     }
 
-    public String getRocketUID() {
+    public final String getRocketUID() {
         return rocketUID;
     }
 
-    public void setRocketUID(String rocketUID) {
+    public final void setRocketUID(String rocketUID) {
         this.rocketUID = rocketUID;
     }
 
-    public long getFireDateUnixTime() {
+    public final long getFireDateUnixTime() {
         return fireDateUnixTime;
     }
 
-    public void setFireDateUnixTime(long fireDateUnixTime) {
+    public final void setFireDateUnixTime(long fireDateUnixTime) {
         this.fireDateUnixTime = fireDateUnixTime;
     }
 
-    public String getDetails() {
+    public final String getDetails() {
         return details;
     }
 
-    public void setDetails(String details) {
+    public final void setDetails(String details) {
         this.details = details;
     }
 
-    public int getFlightNumber() {
+    public final int getFlightNumber() {
         return flightNumber;
     }
 
-    public void setFlightNumber(int flightNumber) {
+    public final void setFlightNumber(int flightNumber) {
         this.flightNumber = flightNumber;
     }
 
-    public String getMissionName() {
+    public final String getMissionName() {
         return missionName;
     }
 
-    public void setMissionName(String missionName) {
+    public final void setMissionName(String missionName) {
         this.missionName = missionName;
     }
 
-    public String getYoutubeWebcast() {
+    public final String getYoutubeWebcast() {
         return youtubeWebcast;
     }
 
-    public void setYoutubeWebcast(String youtubeWebcast) {
+    public final void setYoutubeWebcast(String youtubeWebcast) {
         this.youtubeWebcast = youtubeWebcast;
     }
 }
