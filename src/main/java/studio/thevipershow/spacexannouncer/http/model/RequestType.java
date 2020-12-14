@@ -18,7 +18,7 @@ public enum RequestType implements ResponseClassHolder, JsonResponseProvider {
 
     LAUNCH(NextLaunchResponse.class) {
         @Override
-        public final CompletableFuture<NextLaunchResponse> makeRequest() {
+        public final CompletableFuture<? extends AbstractJsonResponse> makeRequest() {
             return getResponse(nextLaunchRequest())
                     .thenApply(rsp -> {
                         final int statusCode = rsp.statusCode();
@@ -33,7 +33,7 @@ public enum RequestType implements ResponseClassHolder, JsonResponseProvider {
     },
     ROCKET(NextRocketResponse.class) {
         @Override
-        public final CompletableFuture<NextRocketResponse> makeRequest() {
+        public final CompletableFuture<? extends AbstractJsonResponse> makeRequest() {
             return LAUNCH.makeRequest()
                     .thenCompose(rsp -> getResponse(buildGetRequest(BASE_URL + "/rockets/" + ((NextLaunchResponse) rsp).getRocketUID())).thenApply(rst -> {
                         var rocketResponse = new NextRocketResponse(rst.body());
